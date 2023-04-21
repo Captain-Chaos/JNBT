@@ -10,6 +10,7 @@
 
     <name>JNBT</name>
     <description>Fork of Graham Edgecombe's Java NBT library for reading and writing the Minecraft Named Binary Tag format.</description>
+    <url>https://github.com/Captain-Chaos/JNBT</url>
     <inceptionYear>2011</inceptionYear>
 
     <licenses>
