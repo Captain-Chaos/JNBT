@@ -6,7 +6,7 @@
 
     <groupId>org.pepsoft.jnbt</groupId>
     <artifactId>JNBT</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>JNBT</name>
     <description>Fork of Graham Edgecombe's Java NBT library for reading and writing the Minecraft Named Binary Tag format.</description>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>org.pepsoft.utils</groupId>
             <artifactId>Utils</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
@@ -98,4 +98,46 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <!-- Make sure we don't try to release snapshots -->
+                    <plugin>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <version>3.3.0</version>
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <configuration>
+                                    <rules>
+                                        <requireReleaseVersion/>
+                                        <requireReleaseDeps/>
+                                    </rules>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
